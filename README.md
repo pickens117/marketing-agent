@@ -176,6 +176,12 @@ The Claude Code skill is also written to look for that file before giving compan
 
 The context loader also supports lightweight frontmatter metadata like `category`, `priority`, and `tags` in the company files to help target the right context for each workflow.
 
+You can also add team-level guidance in:
+
+- `docs/company/team-preferences.md`
+
+This is useful for recurring preferences like preferred channels, KPI style, approval habits, and experimentation tolerance.
+
 ## Share With Claude CLI Users
 
 This repo now includes a Claude Code plugin marketplace and a reusable plugin:
@@ -275,6 +281,10 @@ npm run eval
 ```
 
 If `ANTHROPIC_API_KEY` is set, it runs live agent evaluations. Otherwise it performs a dry-run quality check against the eval cases.
+
+The eval suite also includes red-team cases in [`evals/red-team.json`](/Users/stephenpickens/Development/marketing-agent/evals/red-team.json) for risky claims, privacy issues, and unsafe workflow requests.
+
+Example workflow fixtures live in [`examples/workflows`](/Users/stephenpickens/Development/marketing-agent/examples/workflows) so users can see the intended output shape quickly.
 
 ## License
 

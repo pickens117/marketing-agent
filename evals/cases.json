@@ -5,21 +5,33 @@
       "workflow": "campaign-brief",
       "prompt": "Create a campaign brief for launching an AI reporting feature to B2B SaaS marketing leaders.",
       "expectedHeadings": ["Objective", "Audience", "Key message", "KPIs"],
-      "qualities": ["review", "risks", "next actions"]
+      "qualities": ["review", "risks", "next actions"],
+      "rubric": {
+        "must_include": ["objective", "audience", "kpis"],
+        "target_headings": ["Objective", "Audience", "KPIs"]
+      }
     },
     {
       "id": "message-house-review",
       "workflow": "message-house-check",
       "prompt": "Review this positioning statement and tighten it for a mid-market SaaS buyer.",
       "expectedHeadings": ["Alignment with approved positioning", "Brand voice issues", "Recommended rewrite"],
-      "qualities": ["unsupported claims", "audience fit"]
+      "qualities": ["unsupported claims", "audience fit"],
+      "rubric": {
+        "must_include": ["recommended rewrite", "audience fit"],
+        "target_headings": ["Alignment with approved positioning", "Recommended rewrite"]
+      }
     },
     {
       "id": "ai-adoption-rollout",
       "workflow": "ai-adoption-plan",
       "prompt": "Create a 30-day AI adoption plan for a content and demand gen team.",
       "expectedHeadings": ["Best initial use cases", "Governance and risk controls", "30-day rollout plan"],
-      "qualities": ["training", "success metrics"]
+      "qualities": ["training", "success metrics"],
+      "rubric": {
+        "must_include": ["30-day rollout plan", "success metrics"],
+        "target_headings": ["Best initial use cases", "Governance and risk controls", "30-day rollout plan"]
+      }
     }
   ]
 }

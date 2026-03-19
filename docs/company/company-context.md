@@ -51,6 +51,7 @@ Update the sections below and add links to the supporting source files in this r
 - @docs/company/brand-guidelines.md
 - @docs/company/message-house.md
 - @docs/company/personas.md
+- @docs/company/team-preferences.md
 - @docs/company/research-summary.md
 - @docs/company/legal-constraints.md
 

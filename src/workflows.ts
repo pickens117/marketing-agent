@@ -14,7 +14,8 @@ export type ContextCategory =
   | "persona"
   | "research"
   | "legal"
-  | "governance";
+  | "governance"
+  | "team";
 
 export type WorkflowDefinition = {
   contextCategories: ContextCategory[];
@@ -25,7 +26,7 @@ export type WorkflowDefinition = {
 
 const workflowDefinitions: Record<WorkflowId, WorkflowDefinition> = {
   general: {
-    contextCategories: ["general", "brand", "messaging", "persona", "research", "legal", "governance"],
+    contextCategories: ["general", "brand", "messaging", "persona", "research", "legal", "governance", "team"],
     description: "General marketing AI enablement support.",
     sectionTitles: ["Objective", "Assumptions", "Recommended approach", "Next actions"],
     outputContract: `Use the response shape that best fits the request.
@@ -37,7 +38,7 @@ At minimum include markdown headings with these exact titles:
 ## Next actions`
   },
   "campaign-brief": {
-    contextCategories: ["brand", "messaging", "persona", "research", "legal"],
+    contextCategories: ["brand", "messaging", "persona", "research", "legal", "team"],
     description: "Create a structured campaign brief grounded in audience, messaging, and business outcomes.",
     sectionTitles: [
       "Objective",
@@ -62,7 +63,7 @@ At minimum include markdown headings with these exact titles:
 ## Recommended next actions`
   },
   "message-house-check": {
-    contextCategories: ["brand", "messaging", "persona", "legal"],
+    contextCategories: ["brand", "messaging", "persona", "legal", "team"],
     description: "Evaluate or improve messaging against the company's message house and positioning.",
     sectionTitles: [
       "Message being evaluated",
@@ -80,10 +81,12 @@ At minimum include markdown headings with these exact titles:
 ## Brand voice issues
 ## Risky or unsupported claims
 ## Recommended rewrite
-## Approval notes`
+## Approval notes
+
+In Approval notes, explicitly state whether human review is required before the message can be used.`
   },
   "content-repurpose": {
-    contextCategories: ["brand", "messaging", "persona", "research"],
+    contextCategories: ["brand", "messaging", "persona", "research", "team"],
     description: "Turn an approved source asset or idea into a distribution-aware repurposing plan.",
     sectionTitles: [
       "Source asset summary",
@@ -102,7 +105,7 @@ At minimum include markdown headings with these exact titles:
 ## Success metrics`
   },
   "experiment-plan": {
-    contextCategories: ["messaging", "persona", "research", "legal"],
+    contextCategories: ["messaging", "persona", "research", "legal", "team"],
     description: "Design an experiment plan with hypotheses, success metrics, and decision thresholds.",
     sectionTitles: [
       "Objective",
@@ -125,7 +128,7 @@ At minimum include markdown headings with these exact titles:
 ## Decision rule`
   },
   "ai-governance-checklist": {
-    contextCategories: ["brand", "legal", "governance"],
+    contextCategories: ["brand", "legal", "governance", "team"],
     description: "Create a practical governance checklist for safe AI-assisted marketing execution.",
     sectionTitles: [
       "Scope",
@@ -146,7 +149,7 @@ At minimum include markdown headings with these exact titles:
 ## Audit or documentation requirements`
   },
   "ai-adoption-plan": {
-    contextCategories: ["brand", "messaging", "legal", "governance", "research"],
+    contextCategories: ["brand", "messaging", "legal", "governance", "research", "team"],
     description: "Create a practical rollout plan for AI adoption within a marketing team.",
     sectionTitles: [
       "Objective",

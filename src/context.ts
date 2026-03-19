@@ -11,6 +11,7 @@ export type CompanyContextSection = {
   content: string;
   metadata: Record<string, string | string[]>;
   path: string;
+  priority: number;
 };
 
 export type CompanyContext = {
@@ -67,11 +68,41 @@ function inferCategory(referencePath: string): ContextCategory {
     return "governance";
   }
 
+  if (lower.includes("team-preferences") || lower.includes("operating-model") || lower.includes("playbook")) {
+    return "team";
+  }
+
   if (lower.includes("research") || lower.includes("market")) {
     return "research";
   }
 
   return "general";
+}
+
+function normalizePriority(value: string | string[] | undefined): number {
+  if (Array.isArray(value)) {
+    return normalizePriority(value[0]);
+  }
+
+  if (!value) {
+    return 2;
+  }
+
+  const normalized = value.toLowerCase();
+  if (normalized === "high") {
+    return 0;
+  }
+
+  if (normalized === "medium") {
+    return 1;
+  }
+
+  if (normalized === "low") {
+    return 2;
+  }
+
+  const numeric = Number(normalized);
+  return Number.isFinite(numeric) ? numeric : 2;
 }
 
 function parseFrontmatter(rawContent: string): {
@@ -163,6 +194,7 @@ export async function loadCompanyContext(
       category: "general",
       content: rootContent,
       metadata: rootParsed.metadata,
+      priority: normalizePriority(rootParsed.metadata.priority),
       path: contextPath
     }
   ];
@@ -177,13 +209,16 @@ export async function loadCompanyContext(
         category: (parsed.metadata.category as ContextCategory | undefined) ?? inferCategory(reference),
         content: parsed.body,
         metadata: parsed.metadata,
+        priority: normalizePriority(parsed.metadata.priority),
         path: reference
       });
     }
   }
 
   const preferredCategorySet = new Set(preferredCategories);
-  const selectedSections = allSections.filter((section) => preferredCategorySet.has(section.category));
+  const selectedSections = allSections
+    .filter((section) => preferredCategorySet.has(section.category))
+    .sort((left, right) => left.priority - right.priority || left.path.localeCompare(right.path));
 
   const content = joinSections([
     ...selectedSections.map((section) =>
@@ -191,6 +226,7 @@ export async function loadCompanyContext(
         ? `Primary context file:\n\n${section.content}`
         : `Referenced file (${section.category}): ${section.path}
 Metadata: ${JSON.stringify(section.metadata)}
+Priority: ${section.priority}
 
 ${section.content}`
     )

@@ -159,6 +159,10 @@ Options:
   --json
   --interactive
   --help
+
+Examples:
+  npm run agent -- --workflow campaign-brief "Create a launch brief for our new feature"
+  npm run agent -- --workflow ai-adoption-plan --json "Create a rollout plan for our content team"
 `;
 }
 
