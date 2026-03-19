@@ -1,3 +1,5 @@
+import type { CompanyContext } from "./context.js";
+
 export type AgentMode = "coach" | "campaign" | "workflow";
 
 const basePrompt = `You are the Marketing AI Enablement Agent for an internal marketing team.
@@ -35,6 +37,24 @@ Prioritize positioning, audience segmentation, channel strategy, messaging, offe
 Prioritize repeatable processes, operating cadences, handoff design, approval checkpoints, QA steps, and governance for AI-assisted marketing work.`
 };
 
-export function buildSystemPrompt(mode: AgentMode): string {
-  return `${basePrompt}\n\n${modeAdditions[mode]}`;
+export function buildSystemPrompt(
+  mode: AgentMode,
+  companyContext: CompanyContext | null = null
+): string {
+  const companyContextSection = companyContext
+    ? `Company-specific context is available at ${companyContext.path}.
+
+Use the following company context as the source of truth for brand voice, messaging, personas, and constraints:
+
+${companyContext.content}
+
+When company context is present:
+- prefer it over generic assumptions
+- do not invent unsupported claims, proof points, or positioning
+- call out conflicts or missing information explicitly`
+    : `No company-specific context file was found.
+
+If the user asks for company-specific guidance, say that you are making generic recommendations and label assumptions clearly. Suggest adding docs/company/company-context.md and supporting files for better answers.`;
+
+  return `${basePrompt}\n\n${modeAdditions[mode]}\n\n${companyContextSection}`;
 }

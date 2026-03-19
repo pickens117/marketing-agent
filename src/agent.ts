@@ -1,4 +1,5 @@
 import { query } from "@anthropic-ai/claude-agent-sdk";
+import { loadCompanyContext } from "./context.js";
 import { buildSubagents } from "./subagents.js";
 import { buildSystemPrompt, type AgentMode } from "./system-prompt.js";
 
@@ -14,6 +15,7 @@ export async function runMarketingAgent({
   prompt
 }: RunAgentOptions): Promise<string> {
   let finalText = "";
+  const companyContext = await loadCompanyContext();
 
   for await (const message of query({
     prompt,
@@ -22,7 +24,7 @@ export async function runMarketingAgent({
       tools: ["WebSearch"],
       maxTurns: 8,
       permissionMode: "dontAsk",
-      systemPrompt: buildSystemPrompt(mode),
+      systemPrompt: buildSystemPrompt(mode, companyContext),
       allowedTools: ["WebSearch"],
       agents: buildSubagents(mode)
     }

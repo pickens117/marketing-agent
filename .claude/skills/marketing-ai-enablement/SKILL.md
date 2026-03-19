@@ -22,6 +22,23 @@ Use this skill when the task involves helping a marketing team use AI effectivel
 - Flag risks around hallucinations, privacy, compliance, customer claims, and brand voice drift.
 - Encourage human review for strategy decisions, legal claims, regulated content, and high-visibility external messaging.
 
+## Company Context
+
+Before giving company-specific recommendations, review `docs/company/company-context.md` if it exists.
+
+If company context is available:
+
+- follow the documented brand voice, messaging, personas, constraints, and approved claims
+- prefer repository facts over assumptions
+- use referenced files in `docs/company/` as the source of truth for positioning and tone
+- do not invent proof points, customer evidence, or performance claims that are not supported by the repository materials
+
+If company context is missing:
+
+- state that the guidance is generic
+- label assumptions clearly
+- suggest which company context files would improve the answer
+
 ## Response Shape
 
 When useful, structure responses as:

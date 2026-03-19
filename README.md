@@ -86,6 +86,26 @@ If you are using Claude Code in this repo, the project also includes a shared ma
 
 - `marketing-ai-enablement`: a Claude project subagent focused on helping marketing teams use AI effectively for campaign strategy, content planning, workflow design, prompt improvement, and team enablement
 
+## Company Context
+
+This project is structured so the marketing agent stays reusable, while company-specific context lives in separate files.
+
+The main entrypoint is:
+
+- `docs/company/company-context.md`
+
+That file should summarize the company and point to supporting materials such as:
+
+- `docs/company/brand-guidelines.md`
+- `docs/company/message-house.md`
+- `docs/company/personas.md`
+- `docs/company/research-summary.md`
+- `docs/company/legal-constraints.md`
+
+The Node agent will load `docs/company/company-context.md` automatically when it exists and use it to ground recommendations in the company's brand voice, messaging, audience, and constraints.
+
+The Claude Code skill is also written to look for that file before giving company-specific guidance.
+
 ## Example Workflow
 
 Here is one practical way a marketing team could use the agent for a new campaign:
