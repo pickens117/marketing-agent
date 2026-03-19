@@ -2,6 +2,8 @@
 
 A Claude Agent SDK starter built for marketing teams that want practical help using AI effectively.
 
+Open source under the MIT License, so anyone can use, modify, and share it.
+
 The agent is tuned to support:
 
 - campaign ideation and positioning
@@ -235,3 +237,7 @@ npm run test
 claude plugin validate .
 claude plugin validate ./plugins/marketing-ai-enablement-plugin
 ```
+
+## License
+
+MIT. See [`LICENSE`](/Users/stephenpickens/Development/marketing-agent/LICENSE).

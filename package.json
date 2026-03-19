@@ -2,6 +2,7 @@
   "name": "marketing-agent",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "A marketing-focused Claude agent built with the Claude Agent SDK.",
   "scripts": {
