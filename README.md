@@ -166,6 +166,11 @@ The CLI now supports stronger workflow-specific output contracts with `--workflo
 
 - `general`: flexible default guidance
 - `campaign-brief`: structured campaign brief
+- `email-sequence-plan`: email sequence planning with CTA and measurement guidance
+- `landing-page-brief`: landing page planning with message match and conversion guidance
+- `campaign-postmortem`: campaign retrospective with learnings and follow-up experiments
+- `content-brief`: content planning with angle, outline, distribution, and CTA guidance
+- `sales-enablement-kit`: sales enablement planning with proof points, objections, and talk tracks
 - `linkedin-ad-plan`: LinkedIn ad planning with format, placement, copy, and measurement guidance
 - `meta-ad-plan`: Meta ad planning with format, placement, creative, and measurement guidance
 - `message-house-check`: messaging review against approved positioning
@@ -263,6 +268,11 @@ Included plugin commands:
 
 - `/campaign-brief`: generates a structured marketing campaign brief
 - `/ai-adoption-plan`: creates a practical AI rollout plan for a marketing team
+- `/email-sequence-plan`: creates an email sequence plan with message progression and measurement guidance
+- `/landing-page-brief`: creates a landing page brief with CTA and conversion guidance
+- `/campaign-postmortem`: creates a campaign postmortem with learnings and next steps
+- `/content-brief`: creates a content brief with angle, outline, distribution, and CTA guidance
+- `/sales-enablement-kit`: creates a sales enablement kit with proof points and talk tracks
 - `/linkedin-ad-plan`: creates a LinkedIn ad plan with format, placement, copy variants, and measurement guidance
 - `/meta-ad-plan`: creates a Meta ad plan with format, placement, creative variants, and measurement guidance
 - `/message-house-check`: reviews messaging against approved positioning

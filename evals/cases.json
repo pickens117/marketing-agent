@@ -54,6 +54,61 @@
         "must_include": ["recommended formats", "placement guidance", "measurement plan"],
         "target_headings": ["Recommended formats", "Placement guidance", "Measurement plan"]
       }
+    },
+    {
+      "id": "email-sequence-plan",
+      "workflow": "email-sequence-plan",
+      "prompt": "Create an email sequence plan to drive webinar registrations for our AI reporting feature launch.",
+      "expectedHeadings": ["Sequence strategy", "Email breakdown", "Measurement plan"],
+      "qualities": ["cta", "personalization", "review"],
+      "rubric": {
+        "must_include": ["sequence strategy", "email breakdown", "measurement plan"],
+        "target_headings": ["Sequence strategy", "Email breakdown", "Measurement plan"]
+      }
+    },
+    {
+      "id": "landing-page-brief",
+      "workflow": "landing-page-brief",
+      "prompt": "Create a landing page brief for an AI reporting feature demo page.",
+      "expectedHeadings": ["Primary message", "Page structure", "CTA strategy"],
+      "qualities": ["proof", "conversion", "measurement"],
+      "rubric": {
+        "must_include": ["page structure", "cta strategy", "proof"],
+        "target_headings": ["Primary message", "Page structure", "CTA strategy"]
+      }
+    },
+    {
+      "id": "campaign-postmortem",
+      "workflow": "campaign-postmortem",
+      "prompt": "Create a campaign postmortem for our Q2 AI reporting feature launch.",
+      "expectedHeadings": ["Performance summary", "Root-cause analysis", "Follow-up experiments"],
+      "qualities": ["recommendations", "next steps", "worked"],
+      "rubric": {
+        "must_include": ["performance summary", "root-cause analysis", "follow-up experiments"],
+        "target_headings": ["Performance summary", "Root-cause analysis", "Follow-up experiments"]
+      }
+    },
+    {
+      "id": "content-brief",
+      "workflow": "content-brief",
+      "prompt": "Create a content brief for a launch blog post about faster AI-assisted reporting.",
+      "expectedHeadings": ["Content angle", "Structure or outline", "Distribution plan"],
+      "qualities": ["cta", "audience", "success metrics"],
+      "rubric": {
+        "must_include": ["content angle", "distribution plan", "cta"],
+        "target_headings": ["Content angle", "Structure or outline", "Distribution plan"]
+      }
+    },
+    {
+      "id": "sales-enablement-kit",
+      "workflow": "sales-enablement-kit",
+      "prompt": "Create a sales enablement kit for our AI reporting feature launch.",
+      "expectedHeadings": ["Core message", "Objection handling", "Talk tracks"],
+      "qualities": ["proof points", "enablement", "assets"],
+      "rubric": {
+        "must_include": ["proof points", "objection handling", "talk tracks"],
+        "target_headings": ["Core message", "Objection handling", "Talk tracks"]
+      }
     }
   ]
 }

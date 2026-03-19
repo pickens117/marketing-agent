@@ -1,6 +1,11 @@
 export type WorkflowId =
   | "general"
   | "campaign-brief"
+  | "email-sequence-plan"
+  | "landing-page-brief"
+  | "campaign-postmortem"
+  | "content-brief"
+  | "sales-enablement-kit"
   | "linkedin-ad-plan"
   | "meta-ad-plan"
   | "message-house-check"
@@ -80,6 +85,156 @@ At minimum include markdown headings with these exact titles:
 ## Risks and review checkpoints
 ## KPIs
 ## Recommended next actions`
+  },
+  "email-sequence-plan": {
+    contextCategories: ["brand", "messaging", "persona", "research", "legal", "team"],
+    description: "Create a structured email sequence plan with goals, audience logic, message progression, and KPIs.",
+    examplePath: "examples/workflows/email-sequence-plan.md",
+    followUpWorkflow: "message-house-check",
+    sectionTitles: [
+      "Objective",
+      "Audience",
+      "Sequence strategy",
+      "Email breakdown",
+      "CTA recommendations",
+      "Personalization notes",
+      "Measurement plan",
+      "Risks and review checkpoints"
+    ],
+    validationRules: [
+      "must include multiple emails or stages",
+      "must include CTA recommendations",
+      "must include a measurement plan"
+    ],
+    outputContract: `Produce an email sequence plan using markdown headings with these exact titles:
+## Objective
+## Audience
+## Sequence strategy
+## Email breakdown
+## CTA recommendations
+## Personalization notes
+## Measurement plan
+## Risks and review checkpoints`
+  },
+  "landing-page-brief": {
+    contextCategories: ["brand", "messaging", "persona", "research", "legal", "team"],
+    description: "Create a landing page brief with message match, conversion strategy, proof, and CTA guidance.",
+    examplePath: "examples/workflows/landing-page-brief.md",
+    followUpWorkflow: "message-house-check",
+    sectionTitles: [
+      "Objective",
+      "Audience",
+      "Primary message",
+      "Page structure",
+      "Proof and trust elements",
+      "CTA strategy",
+      "Conversion risks",
+      "Measurement plan"
+    ],
+    validationRules: [
+      "must include page structure",
+      "must include CTA strategy",
+      "must include proof or trust elements"
+    ],
+    outputContract: `Produce a landing page brief using markdown headings with these exact titles:
+## Objective
+## Audience
+## Primary message
+## Page structure
+## Proof and trust elements
+## CTA strategy
+## Conversion risks
+## Measurement plan`
+  },
+  "campaign-postmortem": {
+    contextCategories: ["messaging", "persona", "research", "legal", "team"],
+    description: "Create a campaign postmortem that summarizes results, learnings, root causes, and next steps.",
+    examplePath: "examples/workflows/campaign-postmortem.md",
+    followUpWorkflow: "experiment-plan",
+    sectionTitles: [
+      "Objective and scope",
+      "Performance summary",
+      "What worked",
+      "What did not work",
+      "Root-cause analysis",
+      "Recommendations",
+      "Follow-up experiments",
+      "Owner and next steps"
+    ],
+    validationRules: [
+      "must include performance summary",
+      "must include root-cause analysis",
+      "must include follow-up experiments or next steps"
+    ],
+    outputContract: `Produce a campaign postmortem using markdown headings with these exact titles:
+## Objective and scope
+## Performance summary
+## What worked
+## What did not work
+## Root-cause analysis
+## Recommendations
+## Follow-up experiments
+## Owner and next steps`
+  },
+  "content-brief": {
+    contextCategories: ["brand", "messaging", "persona", "research", "team"],
+    description: "Create a content brief with audience, angle, structure, distribution intent, and success measures.",
+    examplePath: "examples/workflows/content-brief.md",
+    followUpWorkflow: "content-repurpose",
+    sectionTitles: [
+      "Objective",
+      "Audience",
+      "Content angle",
+      "Key takeaways",
+      "Structure or outline",
+      "Distribution plan",
+      "CTA",
+      "Success metrics"
+    ],
+    validationRules: [
+      "must include a content angle",
+      "must include structure or outline",
+      "must include distribution plan and CTA"
+    ],
+    outputContract: `Produce a content brief using markdown headings with these exact titles:
+## Objective
+## Audience
+## Content angle
+## Key takeaways
+## Structure or outline
+## Distribution plan
+## CTA
+## Success metrics`
+  },
+  "sales-enablement-kit": {
+    contextCategories: ["brand", "messaging", "persona", "research", "legal", "team"],
+    description: "Create a sales enablement kit with messaging, objection handling, proof points, and talk tracks.",
+    examplePath: "examples/workflows/sales-enablement-kit.md",
+    followUpWorkflow: "message-house-check",
+    sectionTitles: [
+      "Objective",
+      "Audience or seller context",
+      "Core message",
+      "Proof points",
+      "Objection handling",
+      "Talk tracks",
+      "Asset recommendations",
+      "Enablement next steps"
+    ],
+    validationRules: [
+      "must include proof points",
+      "must include objection handling",
+      "must include talk tracks or enablement assets"
+    ],
+    outputContract: `Produce a sales enablement kit using markdown headings with these exact titles:
+## Objective
+## Audience or seller context
+## Core message
+## Proof points
+## Objection handling
+## Talk tracks
+## Asset recommendations
+## Enablement next steps`
   },
   "linkedin-ad-plan": {
     contextCategories: ["brand", "messaging", "persona", "research", "legal", "team"],

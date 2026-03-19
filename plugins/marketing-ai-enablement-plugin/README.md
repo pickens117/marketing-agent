@@ -16,5 +16,10 @@ Reusable Claude Code plugin that adds:
 - a `/prompt-improve` command
 - a `/linkedin-ad-plan` command
 - a `/meta-ad-plan` command
+- an `/email-sequence-plan` command
+- a `/landing-page-brief` command
+- a `/campaign-postmortem` command
+- a `/content-brief` command
+- a `/sales-enablement-kit` command
 
 This plugin is designed to be generic across companies. For company-specific guidance, add `docs/company/company-context.md` and supporting files in the target project repository.
