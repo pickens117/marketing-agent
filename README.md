@@ -30,6 +30,10 @@ Use the Claude CLI plugin:
 /campaign-brief Launch a new AI reporting feature for mid-market SaaS marketing teams
 ```
 
+## Demo
+
+![Marketing agent demo](docs/assets/marketing-agent-workflow.gif)
+
 The agent is tuned to support:
 
 - campaign ideation and positioning
