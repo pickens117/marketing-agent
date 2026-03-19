@@ -34,6 +34,10 @@ Use the Claude CLI plugin:
 
 ![Marketing agent demo](docs/assets/marketing-agent-workflow.gif)
 
+### Claude CLI Demo
+
+![Claude CLI workflow demo](docs/assets/claude-cli-workflow.gif)
+
 The agent is tuned to support:
 
 - campaign ideation and positioning
