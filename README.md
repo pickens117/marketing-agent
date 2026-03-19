@@ -133,7 +133,12 @@ To share it with others, publish this repository to GitHub and tell users to run
 /plugin install marketing-ai-enablement-plugin@marketing-agent-marketplace
 ```
 
-After installation, users can invoke the plugin's agent or let Claude use the skill when tasks match.
+After installation, users can invoke the plugin's agent, use its slash commands, or let Claude use the skill when tasks match.
+
+Included plugin commands:
+
+- `/campaign-brief`: generates a structured marketing campaign brief
+- `/ai-adoption-plan`: creates a practical AI rollout plan for a marketing team
 
 ## Example Workflow
 
