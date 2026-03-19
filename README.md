@@ -96,6 +96,30 @@ Use a structured workflow pack:
 npm run agent -- --workflow experiment-plan "Design a LinkedIn messaging test for our new product launch."
 ```
 
+Save an output artifact:
+
+```bash
+npm run agent -- --workflow campaign-brief --out outputs/launch-brief.md "Create a launch brief for our new feature."
+```
+
+Review the result before using it:
+
+```bash
+npm run agent -- --workflow campaign-brief --review "Create a launch brief for our new feature."
+```
+
+Chain into the next recommended workflow:
+
+```bash
+npm run agent -- --workflow campaign-brief --chain "Create a launch brief for our new feature."
+```
+
+Bootstrap starter company files:
+
+```bash
+npm run bootstrap:company
+```
+
 List available workflow packs:
 
 ```bash
@@ -310,6 +334,8 @@ npm run test
 claude plugin validate .
 claude plugin validate ./plugins/marketing-ai-enablement-plugin
 ```
+
+GitHub Actions CI is configured in [`.github/workflows/verify.yml`](/Users/stephenpickens/Development/marketing-agent/.github/workflows/verify.yml) and runs `npm run verify` plus `npm run eval` on pushes and pull requests.
 
 There is also an evaluation harness in [`evals/cases.json`](/Users/stephenpickens/Development/marketing-agent/evals/cases.json) and [`scripts/evaluate.ts`](/Users/stephenpickens/Development/marketing-agent/scripts/evaluate.ts). Run it with:
 

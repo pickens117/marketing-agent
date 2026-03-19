@@ -7,6 +7,7 @@
   "description": "A marketing-focused Claude agent built with the Claude Agent SDK.",
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "bootstrap:company": "tsx src/index.ts --bootstrap-company",
     "generate:plugin": "tsx scripts/generate-plugin-assets.ts",
     "eval": "tsx scripts/evaluate.ts",
     "test": "tsx --test test/**/*.test.ts",

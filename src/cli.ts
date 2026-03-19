@@ -4,12 +4,16 @@ import { getWorkflowDefinition, isWorkflowId, listWorkflowIds, type WorkflowId }
 export type OutputFormat = "text" | "json";
 
 export type CliOptions = {
+  bootstrapCompany: boolean;
+  chain: boolean;
   contextPath?: string;
   help: boolean;
   interactive: boolean;
   mode: AgentMode;
+  outPath?: string;
   output: OutputFormat;
   prompt: string;
+  review: boolean;
   workflow: WorkflowId;
   workflowList: boolean;
 };
@@ -18,10 +22,14 @@ const validModes = new Set<AgentMode>(["coach", "campaign", "workflow"]);
 
 export function parseArgs(argv: string[]): CliOptions {
   let interactive = false;
+  let bootstrapCompany = false;
+  let chain = false;
   let help = false;
   let mode: AgentMode = "coach";
+  let outPath: string | undefined;
   let output: OutputFormat = "text";
   let contextPath: string | undefined;
+  let review = false;
   let workflow: WorkflowId = "general";
   let workflowList = false;
   const promptParts: string[] = [];
@@ -31,6 +39,11 @@ export function parseArgs(argv: string[]): CliOptions {
 
     if (arg === "--interactive") {
       interactive = true;
+      continue;
+    }
+
+    if (arg === "--bootstrap-company") {
+      bootstrapCompany = true;
       continue;
     }
 
@@ -61,6 +74,17 @@ export function parseArgs(argv: string[]): CliOptions {
       continue;
     }
 
+    if (arg === "--out") {
+      const value = argv[index + 1];
+      if (!value) {
+        throw new Error("Expected --out to be followed by a file path.");
+      }
+
+      outPath = value;
+      index += 1;
+      continue;
+    }
+
     if (arg === "--json") {
       output = "json";
       continue;
@@ -68,6 +92,16 @@ export function parseArgs(argv: string[]): CliOptions {
 
     if (arg === "--workflow-list") {
       workflowList = true;
+      continue;
+    }
+
+    if (arg === "--review") {
+      review = true;
+      continue;
+    }
+
+    if (arg === "--chain") {
+      chain = true;
       continue;
     }
 
@@ -86,12 +120,16 @@ export function parseArgs(argv: string[]): CliOptions {
   }
 
   return {
+    bootstrapCompany,
+    chain,
     contextPath,
     help,
     interactive,
     mode,
+    outPath,
     output,
     prompt: promptParts.join(" ").trim(),
+    review,
     workflow,
     workflowList
   };
@@ -156,13 +194,18 @@ Options:
   --workflow <${listWorkflowIds().join("|")}>
   --workflow-list
   --context-path <path>
+  --out <path>
   --json
+  --review
+  --chain
+  --bootstrap-company
   --interactive
   --help
 
 Examples:
   npm run agent -- --workflow campaign-brief "Create a launch brief for our new feature"
   npm run agent -- --workflow ai-adoption-plan --json "Create a rollout plan for our content team"
+  npm run agent -- --workflow campaign-brief --out outputs/brief.md "Create a launch brief"
 `;
 }
 

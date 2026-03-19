@@ -2,10 +2,14 @@ import "dotenv/config";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import { runMarketingAgent } from "./agent.js";
+import { bootstrapCompanyPack } from "./bootstrap.js";
 import { defaultContextPath } from "./context.js";
 import { formatAgentOutput, parseArgs, renderHelp, renderWorkflowList } from "./cli.js";
+import { buildOutputPath, writeOutputFile } from "./output.js";
+import { buildReviewPrompt } from "./review.js";
 import type { AgentMode } from "./system-prompt.js";
 import type { WorkflowId } from "./workflows.js";
+import { getWorkflowDefinition } from "./workflows.js";
 
 async function readPromptFromStdin(): Promise<string> {
   if (process.stdin.isTTY) {
@@ -60,10 +64,6 @@ async function runInteractive(
 }
 
 async function main(): Promise<void> {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    throw new Error("Missing ANTHROPIC_API_KEY. Set it in your environment or .env file.");
-  }
-
   const options = parseArgs(process.argv.slice(2));
 
   if (options.help) {
@@ -74,6 +74,16 @@ async function main(): Promise<void> {
   if (options.workflowList) {
     process.stdout.write(`${renderWorkflowList()}\n`);
     return;
+  }
+
+  if (options.bootstrapCompany) {
+    const destination = await bootstrapCompanyPack();
+    process.stdout.write(`Bootstrapped company starter files to ${destination}\n`);
+    return;
+  }
+
+  if (!process.env.ANTHROPIC_API_KEY) {
+    throw new Error("Missing ANTHROPIC_API_KEY. Set it in your environment or .env file.");
   }
 
   const pipedPrompt = await readPromptFromStdin();
@@ -96,16 +106,53 @@ async function main(): Promise<void> {
     workflow: options.workflow
   });
 
+  let finalResponse = response;
+
+  if (options.review) {
+    finalResponse = await runMarketingAgent({
+      contextPath: options.contextPath,
+      mode: "workflow",
+      prompt: buildReviewPrompt(options.workflow, finalResponse),
+      stream: false,
+      workflow: "general"
+    });
+  }
+
+  if (options.chain) {
+    const nextWorkflow = getWorkflowDefinition(options.workflow).followUpWorkflow;
+    if (nextWorkflow) {
+      const chainedPrompt = `Use the following ${options.workflow} output as input and produce the next workflow: ${nextWorkflow}.\n\n${finalResponse}`;
+      finalResponse = await runMarketingAgent({
+        contextPath: options.contextPath,
+        mode: options.mode,
+        prompt: chainedPrompt,
+        stream: false,
+        workflow: nextWorkflow
+      });
+    }
+  }
+
+  const outputPath = buildOutputPath(options.workflow, prompt, options.outPath);
+  if (options.outPath) {
+    await writeOutputFile(outputPath, finalResponse);
+  }
+
   if (options.output === "json") {
     process.stdout.write(
       `${formatAgentOutput({
         contextPath: options.contextPath ?? defaultContextPath,
         mode: options.mode,
         output: options.output,
-        response,
+        response: finalResponse,
         workflow: options.workflow
       })}\n`
     );
+  } else if (!options.outPath && options.output !== "text") {
+    process.stdout.write(`${finalResponse}\n`);
+  }
+
+  if (options.outPath) {
+    process.stdout.write(`Saved output to ${outputPath}\n`);
   }
 }
 

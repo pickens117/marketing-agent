@@ -16,12 +16,16 @@ test("parseArgs reads mode, context path, and json output", () => {
   ]);
 
   assert.deepEqual(result, {
+    bootstrapCompany: false,
+    chain: false,
     contextPath: "custom/context.md",
     help: false,
     interactive: false,
     mode: "campaign",
+    outPath: undefined,
     output: "json",
     prompt: "Build a launch plan",
+    review: false,
     workflow: "general",
     workflowList: false
   });
@@ -61,7 +65,11 @@ test("parseArgs reads workflow option", () => {
 
   assert.equal(result.workflow, "experiment-plan");
   assert.equal(result.prompt, "Design a test");
+  assert.equal(result.bootstrapCompany, false);
+  assert.equal(result.chain, false);
   assert.equal(result.help, false);
+  assert.equal(result.outPath, undefined);
+  assert.equal(result.review, false);
   assert.equal(result.workflowList, false);
 });
 
