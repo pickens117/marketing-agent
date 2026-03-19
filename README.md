@@ -38,6 +38,10 @@ Use the Claude CLI plugin:
 
 ![Claude CLI workflow demo](docs/assets/claude-cli-workflow.gif)
 
+### Workflow Pack Demo
+
+![Workflow pack demo](docs/assets/workflow-pack-demo.gif)
+
 The agent is tuned to support:
 
 - campaign ideation and positioning
