@@ -10,6 +10,26 @@ This repo is designed to work in three ways:
 - as a repo-local Claude Code setup with skills and agents
 - as a shareable Claude Code plugin marketplace that anyone with the Claude CLI can install
 
+## Quick Start
+
+Use the Node CLI:
+
+```bash
+npm install
+export ANTHROPIC_API_KEY="your-api-key"
+npm run bootstrap:company
+npm run agent -- --workflow-list
+npm run agent -- --workflow campaign-brief "Create a launch brief for our new feature."
+```
+
+Use the Claude CLI plugin:
+
+```text
+/plugin marketplace add pickens117/marketing-agent
+/plugin install marketing-ai-enablement-plugin@marketing-agent-marketplace
+/campaign-brief Launch a new AI reporting feature for mid-market SaaS marketing teams
+```
+
 The agent is tuned to support:
 
 - campaign ideation and positioning
@@ -57,6 +77,8 @@ npm run verify
 ```bash
 npm run generate:plugin
 ```
+
+Note: this repo is open source and shareable, but `"private": true` remains in `package.json` to prevent accidental npm publishing.
 
 ## Run It
 
@@ -185,8 +207,8 @@ That file should summarize the company and point to supporting materials such as
 - `docs/company/brand-guidelines.md`
 - `docs/company/message-house.md`
 - `docs/company/personas.md`
-- `docs/company/research-summary.md`
-- `docs/company/legal-constraints.md`
+- `docs/company/team-preferences.md`
+- files from `docs/company/example-pack/` if you want example research and legal materials
 
 Starter templates are included for:
 
@@ -323,6 +345,13 @@ Use the marketing-ai-enablement subagent to help me build a campaign launch plan
 - `src/agent.ts`: Claude Agent SDK integration
 - `src/system-prompt.ts`: marketing-team system prompt and mode presets
 - `src/subagents.ts`: specialist marketing subagents the main agent can delegate to
+- `src/workflows.ts`: workflow packs, output contracts, and validation rules
+- `scripts/`: plugin generation and evaluation scripts
+- `evals/`: standard and red-team evaluation cases
+- `examples/workflows/`: example workflow outputs
+- `templates/company-starter/`: starter company context files
+- `plugins/marketing-ai-enablement-plugin/`: shareable Claude Code plugin
+- `.claude-plugin/`: local plugin marketplace definition
 
 ## Notes
 
@@ -331,6 +360,7 @@ The project includes a `verify` script that runs:
 ```bash
 npm run build
 npm run test
+npm run generate:plugin
 claude plugin validate .
 claude plugin validate ./plugins/marketing-ai-enablement-plugin
 ```
