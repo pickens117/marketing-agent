@@ -73,6 +73,51 @@ The agent is instructed to produce:
 - suggested prompts or templates when useful
 - experiments, KPIs, and next steps
 
+## Subagents
+
+The main agent can delegate to specialist subagents when a task needs deeper support in a specific area:
+
+- `strategist`: campaign strategy, audience selection, positioning, offer design, and messaging architecture
+- `content_lead`: content planning, repurposing ideas, editorial angles, and prompt-ready creative briefs
+- `analyst`: measurement plans, funnel diagnostics, testing frameworks, and campaign performance interpretation
+- `enablement_ops`: AI workflow design, governance, prompt libraries, QA checklists, and team enablement programs
+
+If you are using Claude Code in this repo, the project also includes a shared marketing subagent:
+
+- `marketing-ai-enablement`: a Claude project subagent focused on helping marketing teams use AI effectively for campaign strategy, content planning, workflow design, prompt improvement, and team enablement
+
+## Example Workflow
+
+Here is one practical way a marketing team could use the agent for a new campaign:
+
+1. Start in `campaign` mode and ask for the launch strategy.
+
+```bash
+npm run agent -- --mode campaign "We are launching a new AI analytics feature for B2B SaaS marketers. Create a campaign strategy for pipeline generation."
+```
+
+2. Use the output to refine positioning, audience segments, channels, and success metrics.
+
+3. Ask the agent to develop content angles and assets.
+
+```bash
+npm run agent -- --mode campaign "Using that strategy, create three webinar angles, five LinkedIn post concepts, and an email sequence outline."
+```
+
+4. Switch to `workflow` mode to design the team process for producing and reviewing AI-assisted content.
+
+```bash
+npm run agent -- --mode workflow "Create a lightweight workflow for drafting, reviewing, and approving AI-assisted campaign content across demand gen and content marketing."
+```
+
+5. Use the recommendations to create a repeatable operating playbook with prompts, QA checks, owners, and KPIs.
+
+If you are using Claude Code instead of the Node CLI, you can also work through the same flow by invoking the project subagent directly:
+
+```text
+Use the marketing-ai-enablement subagent to help me build a campaign launch plan and an AI-assisted content workflow for the team.
+```
+
 ## Project Structure
 
 - `src/index.ts`: CLI entrypoint
@@ -82,7 +127,7 @@ The agent is instructed to produce:
 
 ## Notes
 
-This environment did not have `node` or `npm` installed, so the code was scaffolded but not executed here. After installing Node, run:
+The project has been installed and verified with:
 
 ```bash
 npm install
