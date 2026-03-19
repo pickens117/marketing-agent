@@ -1,6 +1,8 @@
 export type WorkflowId =
   | "general"
   | "campaign-brief"
+  | "linkedin-ad-plan"
+  | "meta-ad-plan"
   | "message-house-check"
   | "content-repurpose"
   | "experiment-plan"
@@ -78,6 +80,66 @@ At minimum include markdown headings with these exact titles:
 ## Risks and review checkpoints
 ## KPIs
 ## Recommended next actions`
+  },
+  "linkedin-ad-plan": {
+    contextCategories: ["brand", "messaging", "persona", "research", "legal", "team"],
+    description: "Create a LinkedIn ad plan with audience, creative angles, copy variants, and measurement guidance.",
+    examplePath: "examples/workflows/linkedin-ad-plan.md",
+    followUpWorkflow: "experiment-plan",
+    sectionTitles: [
+      "Objective",
+      "Audience",
+      "Offer",
+      "Creative angles",
+      "Ad copy variants",
+      "CTA recommendations",
+      "Measurement plan",
+      "Risks and review checkpoints"
+    ],
+    validationRules: [
+      "must include LinkedIn-specific audience framing",
+      "must include multiple ad copy variants",
+      "must include a measurement plan and review checkpoints"
+    ],
+    outputContract: `Produce a LinkedIn ad plan using markdown headings with these exact titles:
+## Objective
+## Audience
+## Offer
+## Creative angles
+## Ad copy variants
+## CTA recommendations
+## Measurement plan
+## Risks and review checkpoints`
+  },
+  "meta-ad-plan": {
+    contextCategories: ["brand", "messaging", "persona", "research", "legal", "team"],
+    description: "Create a Meta ad plan with audience hypotheses, creative angles, copy variants, and measurement guidance.",
+    examplePath: "examples/workflows/meta-ad-plan.md",
+    followUpWorkflow: "experiment-plan",
+    sectionTitles: [
+      "Objective",
+      "Audience hypotheses",
+      "Offer",
+      "Creative angles",
+      "Ad copy variants",
+      "CTA recommendations",
+      "Measurement plan",
+      "Risks and review checkpoints"
+    ],
+    validationRules: [
+      "must include Meta-friendly audience hypotheses",
+      "must include multiple creative and copy variants",
+      "must include a measurement plan and review checkpoints"
+    ],
+    outputContract: `Produce a Meta ad plan using markdown headings with these exact titles:
+## Objective
+## Audience hypotheses
+## Offer
+## Creative angles
+## Ad copy variants
+## CTA recommendations
+## Measurement plan
+## Risks and review checkpoints`
   },
   "message-house-check": {
     contextCategories: ["brand", "messaging", "persona", "legal", "team"],

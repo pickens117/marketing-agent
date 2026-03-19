@@ -166,6 +166,8 @@ The CLI now supports stronger workflow-specific output contracts with `--workflo
 
 - `general`: flexible default guidance
 - `campaign-brief`: structured campaign brief
+- `linkedin-ad-plan`: LinkedIn ad planning with copy variants and measurement guidance
+- `meta-ad-plan`: Meta ad planning with audience hypotheses and creative variants
 - `message-house-check`: messaging review against approved positioning
 - `content-repurpose`: content repurposing plan
 - `experiment-plan`: test plan with thresholds and decision rules
@@ -261,6 +263,8 @@ Included plugin commands:
 
 - `/campaign-brief`: generates a structured marketing campaign brief
 - `/ai-adoption-plan`: creates a practical AI rollout plan for a marketing team
+- `/linkedin-ad-plan`: creates a LinkedIn ad plan with copy variants and measurement guidance
+- `/meta-ad-plan`: creates a Meta ad plan with audience hypotheses and creative variants
 - `/message-house-check`: reviews messaging against approved positioning
 - `/content-repurpose`: creates a repurposing plan from a source asset or topic
 - `/experiment-plan`: builds a test plan with metrics and decision thresholds
@@ -289,19 +293,31 @@ One simple Claude Code workflow for a marketing team could look like this:
 /campaign-brief Launch a new AI reporting feature for mid-market SaaS marketing teams
 ```
 
-4. Refine the messaging:
+4. Create a LinkedIn ad plan:
+
+```text
+/linkedin-ad-plan Promote our new AI reporting feature to VP Marketing and demand gen leaders
+```
+
+5. Create a Meta ad plan:
+
+```text
+/meta-ad-plan Generate awareness and leads for our new AI reporting feature launch
+```
+
+6. Refine the messaging:
 
 ```text
 /message-house-check We help marketers automate reporting completely with zero analyst effort.
 ```
 
-5. Create the rollout plan for the team:
+7. Create the rollout plan for the team:
 
 ```text
 /ai-adoption-plan Roll out AI-assisted workflows for our content and demand gen teams this quarter
 ```
 
-6. If needed, improve a working prompt before handing it to the team:
+8. If needed, improve a working prompt before handing it to the team:
 
 ```text
 /prompt-improve Write five LinkedIn posts about our product launch.
@@ -332,6 +348,14 @@ npm run agent -- --mode workflow "Create a lightweight workflow for drafting, re
 ```
 
 5. Use the recommendations to create a repeatable operating playbook with prompts, QA checks, owners, and KPIs.
+
+If your focus is paid social specifically, a good Node CLI flow is:
+
+```bash
+npm run agent -- --workflow linkedin-ad-plan "Create a LinkedIn ad plan for our AI reporting feature."
+npm run agent -- --workflow meta-ad-plan "Create a Meta ad plan for our AI reporting feature."
+npm run agent -- --workflow experiment-plan "Design creative and messaging tests for our LinkedIn and Meta ads."
+```
 
 If you are using Claude Code instead of the Node CLI, you can also work through the same flow by invoking the project subagent directly:
 

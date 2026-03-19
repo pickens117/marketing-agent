@@ -32,6 +32,28 @@
         "must_include": ["30-day rollout plan", "success metrics"],
         "target_headings": ["Best initial use cases", "Governance and risk controls", "30-day rollout plan"]
       }
+    },
+    {
+      "id": "linkedin-ad-plan",
+      "workflow": "linkedin-ad-plan",
+      "prompt": "Create a LinkedIn ad plan for launching a B2B SaaS AI reporting feature to VP Marketing.",
+      "expectedHeadings": ["Audience", "Ad copy variants", "Measurement plan"],
+      "qualities": ["linkedin", "cta", "review"],
+      "rubric": {
+        "must_include": ["ad copy variants", "measurement plan", "cta"],
+        "target_headings": ["Audience", "Ad copy variants", "Measurement plan"]
+      }
+    },
+    {
+      "id": "meta-ad-plan",
+      "workflow": "meta-ad-plan",
+      "prompt": "Create a Meta ad plan for generating awareness and leads for an AI reporting feature launch.",
+      "expectedHeadings": ["Audience hypotheses", "Ad copy variants", "Measurement plan"],
+      "qualities": ["meta", "cta", "review"],
+      "rubric": {
+        "must_include": ["audience hypotheses", "ad copy variants", "measurement plan"],
+        "target_headings": ["Audience hypotheses", "Ad copy variants", "Measurement plan"]
+      }
     }
   ]
 }

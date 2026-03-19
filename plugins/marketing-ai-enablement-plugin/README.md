@@ -14,5 +14,7 @@ Reusable Claude Code plugin that adds:
 - a `/persona-brief` command
 - a `/launch-checklist` command
 - a `/prompt-improve` command
+- a `/linkedin-ad-plan` command
+- a `/meta-ad-plan` command
 
 This plugin is designed to be generic across companies. For company-specific guidance, add `docs/company/company-context.md` and supporting files in the target project repository.
