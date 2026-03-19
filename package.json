@@ -1,0 +1,24 @@
+{
+  "name": "marketing-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A marketing-focused Claude agent built with the Claude Agent SDK.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "chat": "tsx src/index.ts --interactive",
+    "agent": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "latest",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
