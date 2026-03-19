@@ -1,3 +1,11 @@
+---
+company_name:
+industry:
+priority: high
+tags:
+  - company-context
+---
+
 # Company Context
 
 Use this file as the main entrypoint for company-specific marketing context.

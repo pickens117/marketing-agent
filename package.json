@@ -7,11 +7,13 @@
   "description": "A marketing-focused Claude agent built with the Claude Agent SDK.",
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "generate:plugin": "tsx scripts/generate-plugin-assets.ts",
+    "eval": "tsx scripts/evaluate.ts",
     "test": "tsx --test test/**/*.test.ts",
     "test:source": "tsx --test test/**/*.test.ts",
     "chat": "tsx src/index.ts --interactive",
     "agent": "tsx src/index.ts",
-    "verify": "npm run build && npm run test && claude plugin validate . && claude plugin validate ./plugins/marketing-ai-enablement-plugin"
+    "verify": "npm run build && npm run test && npm run generate:plugin && claude plugin validate . && claude plugin validate ./plugins/marketing-ai-enablement-plugin"
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "0.2.79",

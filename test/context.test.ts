@@ -12,7 +12,7 @@ test("loadCompanyContext includes referenced files when present", async () => {
   await mkdir(docsDir, { recursive: true });
   await writeFile(
     path.join(docsDir, "brand-guidelines.md"),
-    "# Brand\nUse a calm and credible voice.",
+    "---\ncategory: brand\npriority: high\n---\n# Brand\nUse a calm and credible voice.",
     "utf8"
   );
   await writeFile(
@@ -26,6 +26,7 @@ test("loadCompanyContext includes referenced files when present", async () => {
   assert.ok(result);
   assert.equal(result?.referencedFiles[0], "brand-guidelines.md");
   assert.match(result?.content ?? "", /Use a calm and credible voice/);
+  assert.equal(result?.sections[1]?.metadata.priority, "high");
 });
 
 test("loadCompanyContext filters referenced content by category", async () => {

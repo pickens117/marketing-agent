@@ -1,3 +1,11 @@
+---
+category: persona
+priority: medium
+tags:
+  - audience
+  - persona
+---
+
 # Personas
 
 Use this file for audience-specific guidance.

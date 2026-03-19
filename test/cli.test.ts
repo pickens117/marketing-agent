@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { formatAgentOutput, parseArgs } from "../src/cli.ts";
+import { formatAgentOutput, parseArgs, renderHelp, renderWorkflowList } from "../src/cli.ts";
 
 test("parseArgs reads mode, context path, and json output", () => {
   const result = parseArgs([
@@ -17,11 +17,13 @@ test("parseArgs reads mode, context path, and json output", () => {
 
   assert.deepEqual(result, {
     contextPath: "custom/context.md",
+    help: false,
     interactive: false,
     mode: "campaign",
     output: "json",
     prompt: "Build a launch plan",
-    workflow: "general"
+    workflow: "general",
+    workflowList: false
   });
 });
 
@@ -45,6 +47,7 @@ test("formatAgentOutput returns JSON when requested", () => {
         contextPath: "docs/company/company-context.md",
         mode: "workflow",
         response: "Plan ready",
+        sections: {},
         workflow: "ai-adoption-plan"
       },
       null,
@@ -58,4 +61,14 @@ test("parseArgs reads workflow option", () => {
 
   assert.equal(result.workflow, "experiment-plan");
   assert.equal(result.prompt, "Design a test");
+  assert.equal(result.help, false);
+  assert.equal(result.workflowList, false);
+});
+
+test("renderHelp mentions workflow list", () => {
+  assert.match(renderHelp(), /--workflow-list/);
+});
+
+test("renderWorkflowList includes campaign brief", () => {
+  assert.match(renderWorkflowList(), /campaign-brief/);
 });

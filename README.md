@@ -4,6 +4,12 @@ A Claude Agent SDK starter built for marketing teams that want practical help us
 
 Open source under the MIT License, so anyone can use, modify, and share it.
 
+This repo is designed to work in three ways:
+
+- as a standalone Node CLI built on the Claude Agent SDK
+- as a repo-local Claude Code setup with skills and agents
+- as a shareable Claude Code plugin marketplace that anyone with the Claude CLI can install
+
 The agent is tuned to support:
 
 - campaign ideation and positioning
@@ -46,6 +52,12 @@ export ANTHROPIC_API_KEY="your-api-key"
 npm run verify
 ```
 
+5. Regenerate plugin prompt assets from the canonical prompt source when prompt content changes:
+
+```bash
+npm run generate:plugin
+```
+
 ## Run It
 
 Use a one-off prompt:
@@ -82,6 +94,18 @@ Use a structured workflow pack:
 
 ```bash
 npm run agent -- --workflow experiment-plan "Design a LinkedIn messaging test for our new product launch."
+```
+
+List available workflow packs:
+
+```bash
+npm run agent -- --workflow-list
+```
+
+Show CLI help:
+
+```bash
+npm run agent -- --help
 ```
 
 ## Modes
@@ -150,6 +174,8 @@ The Node agent will load `docs/company/company-context.md` automatically when it
 
 The Claude Code skill is also written to look for that file before giving company-specific guidance.
 
+The context loader also supports lightweight frontmatter metadata like `category`, `priority`, and `tags` in the company files to help target the right context for each workflow.
+
 ## Share With Claude CLI Users
 
 This repo now includes a Claude Code plugin marketplace and a reusable plugin:
@@ -187,6 +213,10 @@ Included plugin commands:
 - `/content-repurpose`: creates a repurposing plan from a source asset or topic
 - `/experiment-plan`: builds a test plan with metrics and decision thresholds
 - `/ai-governance-checklist`: generates a practical AI governance checklist
+- `/content-calendar`: creates a lightweight channel-aware content calendar
+- `/persona-brief`: creates or refines a persona brief
+- `/launch-checklist`: creates a launch readiness checklist
+- `/prompt-improve`: rewrites a marketing prompt for better outputs
 
 ## Example Workflow
 
@@ -237,6 +267,14 @@ npm run test
 claude plugin validate .
 claude plugin validate ./plugins/marketing-ai-enablement-plugin
 ```
+
+There is also an evaluation harness in [`evals/cases.json`](/Users/stephenpickens/Development/marketing-agent/evals/cases.json) and [`scripts/evaluate.ts`](/Users/stephenpickens/Development/marketing-agent/scripts/evaluate.ts). Run it with:
+
+```bash
+npm run eval
+```
+
+If `ANTHROPIC_API_KEY` is set, it runs live agent evaluations. Otherwise it performs a dry-run quality check against the eval cases.
 
 ## License
 

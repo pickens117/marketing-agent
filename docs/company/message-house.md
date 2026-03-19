@@ -1,3 +1,11 @@
+---
+category: messaging
+priority: high
+tags:
+  - messaging
+  - positioning
+---
+
 # Message House
 
 Use this file for approved positioning and messaging.

@@ -3,7 +3,7 @@ import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import { runMarketingAgent } from "./agent.js";
 import { defaultContextPath } from "./context.js";
-import { formatAgentOutput, parseArgs } from "./cli.js";
+import { formatAgentOutput, parseArgs, renderHelp, renderWorkflowList } from "./cli.js";
 import type { AgentMode } from "./system-prompt.js";
 import type { WorkflowId } from "./workflows.js";
 
@@ -65,6 +65,17 @@ async function main(): Promise<void> {
   }
 
   const options = parseArgs(process.argv.slice(2));
+
+  if (options.help) {
+    process.stdout.write(`${renderHelp()}\n`);
+    return;
+  }
+
+  if (options.workflowList) {
+    process.stdout.write(`${renderWorkflowList()}\n`);
+    return;
+  }
+
   const pipedPrompt = await readPromptFromStdin();
   const prompt = options.prompt || pipedPrompt;
 

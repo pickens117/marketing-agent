@@ -1,3 +1,11 @@
+---
+category: brand
+priority: high
+tags:
+  - brand
+  - tone
+---
+
 # Brand Guidelines
 
 Use this file for brand voice, tone, writing style, and visual or verbal rules that the marketing agent should follow.

@@ -20,96 +20,157 @@ export type WorkflowDefinition = {
   contextCategories: ContextCategory[];
   description: string;
   outputContract: string;
+  sectionTitles: string[];
 };
 
 const workflowDefinitions: Record<WorkflowId, WorkflowDefinition> = {
   general: {
     contextCategories: ["general", "brand", "messaging", "persona", "research", "legal", "governance"],
     description: "General marketing AI enablement support.",
+    sectionTitles: ["Objective", "Assumptions", "Recommended approach", "Next actions"],
     outputContract: `Use the response shape that best fits the request.
 
-At minimum include:
-1. Objective
-2. Assumptions
-3. Recommended approach
-4. Next actions`
+At minimum include markdown headings with these exact titles:
+## Objective
+## Assumptions
+## Recommended approach
+## Next actions`
   },
   "campaign-brief": {
     contextCategories: ["brand", "messaging", "persona", "research", "legal"],
     description: "Create a structured campaign brief grounded in audience, messaging, and business outcomes.",
-    outputContract: `Produce a campaign brief with these sections:
-1. Objective
-2. Audience
-3. Key message
-4. Offer or CTA
-5. Channel plan
-6. Content assets needed
-7. Risks and review checkpoints
-8. KPIs
-9. Recommended next actions`
+    sectionTitles: [
+      "Objective",
+      "Audience",
+      "Key message",
+      "Offer or CTA",
+      "Channel plan",
+      "Content assets needed",
+      "Risks and review checkpoints",
+      "KPIs",
+      "Recommended next actions"
+    ],
+    outputContract: `Produce a campaign brief using markdown headings with these exact titles:
+## Objective
+## Audience
+## Key message
+## Offer or CTA
+## Channel plan
+## Content assets needed
+## Risks and review checkpoints
+## KPIs
+## Recommended next actions`
   },
   "message-house-check": {
     contextCategories: ["brand", "messaging", "persona", "legal"],
     description: "Evaluate or improve messaging against the company's message house and positioning.",
-    outputContract: `Produce a messaging review with these sections:
-1. Message being evaluated
-2. Alignment with approved positioning
-3. Audience fit
-4. Brand voice issues
-5. Risky or unsupported claims
-6. Recommended rewrite
-7. Approval notes`
+    sectionTitles: [
+      "Message being evaluated",
+      "Alignment with approved positioning",
+      "Audience fit",
+      "Brand voice issues",
+      "Risky or unsupported claims",
+      "Recommended rewrite",
+      "Approval notes"
+    ],
+    outputContract: `Produce a messaging review using markdown headings with these exact titles:
+## Message being evaluated
+## Alignment with approved positioning
+## Audience fit
+## Brand voice issues
+## Risky or unsupported claims
+## Recommended rewrite
+## Approval notes`
   },
   "content-repurpose": {
     contextCategories: ["brand", "messaging", "persona", "research"],
     description: "Turn an approved source asset or idea into a distribution-aware repurposing plan.",
-    outputContract: `Produce a repurposing plan with these sections:
-1. Source asset summary
-2. Audience and channel targets
-3. Repurposed asset ideas
-4. Suggested prompts or briefs
-5. Review checkpoints
-6. Success metrics`
+    sectionTitles: [
+      "Source asset summary",
+      "Audience and channel targets",
+      "Repurposed asset ideas",
+      "Suggested prompts or briefs",
+      "Review checkpoints",
+      "Success metrics"
+    ],
+    outputContract: `Produce a repurposing plan using markdown headings with these exact titles:
+## Source asset summary
+## Audience and channel targets
+## Repurposed asset ideas
+## Suggested prompts or briefs
+## Review checkpoints
+## Success metrics`
   },
   "experiment-plan": {
     contextCategories: ["messaging", "persona", "research", "legal"],
     description: "Design an experiment plan with hypotheses, success metrics, and decision thresholds.",
-    outputContract: `Produce an experiment plan with these sections:
-1. Objective
-2. Hypothesis
-3. Test design
-4. Audience and channel
-5. Variants
-6. Metrics and thresholds
-7. Risks and confounders
-8. Decision rule`
+    sectionTitles: [
+      "Objective",
+      "Hypothesis",
+      "Test design",
+      "Audience and channel",
+      "Variants",
+      "Metrics and thresholds",
+      "Risks and confounders",
+      "Decision rule"
+    ],
+    outputContract: `Produce an experiment plan using markdown headings with these exact titles:
+## Objective
+## Hypothesis
+## Test design
+## Audience and channel
+## Variants
+## Metrics and thresholds
+## Risks and confounders
+## Decision rule`
   },
   "ai-governance-checklist": {
     contextCategories: ["brand", "legal", "governance"],
     description: "Create a practical governance checklist for safe AI-assisted marketing execution.",
-    outputContract: `Produce a governance checklist with these sections:
-1. Scope
-2. Allowed use cases
-3. Human review checkpoints
-4. Claim and compliance checks
-5. Data handling rules
-6. Escalation triggers
-7. Audit or documentation requirements`
+    sectionTitles: [
+      "Scope",
+      "Allowed use cases",
+      "Human review checkpoints",
+      "Claim and compliance checks",
+      "Data handling rules",
+      "Escalation triggers",
+      "Audit or documentation requirements"
+    ],
+    outputContract: `Produce a governance checklist using markdown headings with these exact titles:
+## Scope
+## Allowed use cases
+## Human review checkpoints
+## Claim and compliance checks
+## Data handling rules
+## Escalation triggers
+## Audit or documentation requirements`
   },
   "ai-adoption-plan": {
     contextCategories: ["brand", "messaging", "legal", "governance", "research"],
     description: "Create a practical rollout plan for AI adoption within a marketing team.",
-    outputContract: `Produce an AI adoption plan with these sections:
-1. Objective
-2. Current-state assumptions
-3. Best initial use cases
-4. Recommended workflow changes
-5. Roles and responsibilities
-6. Prompting and QA guidance
-7. Governance and risk controls
-8. Enablement and training plan
-9. Success metrics
-10. 30-day rollout plan`
+    sectionTitles: [
+      "Objective",
+      "Current-state assumptions",
+      "Best initial use cases",
+      "Recommended workflow changes",
+      "Roles and responsibilities",
+      "Prompting and QA guidance",
+      "Governance and risk controls",
+      "Enablement and training plan",
+      "Success metrics",
+      "30-day rollout plan"
+    ],
+    outputContract: `Produce an AI adoption plan using markdown headings with these exact titles:
+## Objective
+## Current-state assumptions
+## Best initial use cases
+## Recommended workflow changes
+## Roles and responsibilities
+## Prompting and QA guidance
+## Governance and risk controls
+## Enablement and training plan
+## Success metrics
+## 30-day rollout plan`
   }
 };
 

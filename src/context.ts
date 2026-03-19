@@ -9,6 +9,7 @@ const maxInlineCharacters = 12000;
 export type CompanyContextSection = {
   category: ContextCategory;
   content: string;
+  metadata: Record<string, string | string[]>;
   path: string;
 };
 
@@ -73,6 +74,55 @@ function inferCategory(referencePath: string): ContextCategory {
   return "general";
 }
 
+function parseFrontmatter(rawContent: string): {
+  body: string;
+  metadata: Record<string, string | string[]>;
+} {
+  if (!rawContent.startsWith("---\n")) {
+    return { body: rawContent.trim(), metadata: {} };
+  }
+
+  const endIndex = rawContent.indexOf("\n---\n", 4);
+  if (endIndex === -1) {
+    return { body: rawContent.trim(), metadata: {} };
+  }
+
+  const frontmatter = rawContent.slice(4, endIndex).trim();
+  const body = rawContent.slice(endIndex + 5).trim();
+  const metadata: Record<string, string | string[]> = {};
+  let currentArrayKey: string | null = null;
+
+  for (const line of frontmatter.split("\n")) {
+    if (line.startsWith("  - ") || line.startsWith("- ")) {
+      if (currentArrayKey) {
+        const current = metadata[currentArrayKey];
+        const nextValue = line.replace(/^(\s*- )/, "").trim();
+        metadata[currentArrayKey] = Array.isArray(current) ? [...current, nextValue] : [nextValue];
+      }
+      continue;
+    }
+
+    const separatorIndex = line.indexOf(":");
+    if (separatorIndex === -1) {
+      continue;
+    }
+
+    const key = line.slice(0, separatorIndex).trim();
+    const value = line.slice(separatorIndex + 1).trim();
+
+    if (!value) {
+      currentArrayKey = key;
+      metadata[key] = [];
+      continue;
+    }
+
+    currentArrayKey = null;
+    metadata[key] = value;
+  }
+
+  return { body, metadata };
+}
+
 function joinSections(sections: string[]): string {
   let total = 0;
   const accepted: string[] = [];
@@ -99,7 +149,9 @@ export async function loadCompanyContext(
     return null;
   }
 
-  const rootContent = (await readFile(contextPath, "utf8")).trim();
+  const rootRawContent = (await readFile(contextPath, "utf8")).trim();
+  const rootParsed = parseFrontmatter(rootRawContent);
+  const rootContent = rootParsed.body;
 
   if (!rootContent) {
     return null;
@@ -110,18 +162,21 @@ export async function loadCompanyContext(
     {
       category: "general",
       content: rootContent,
+      metadata: rootParsed.metadata,
       path: contextPath
     }
   ];
 
   for (const reference of referencedFiles) {
     const resolvedPath = resolveReference(contextPath, reference);
-    const referencedContent = await readReferencedFile(resolvedPath);
+    const referencedRawContent = await readReferencedFile(resolvedPath);
 
-    if (referencedContent) {
+    if (referencedRawContent) {
+      const parsed = parseFrontmatter(referencedRawContent);
       allSections.push({
-        category: inferCategory(reference),
-        content: referencedContent,
+        category: (parsed.metadata.category as ContextCategory | undefined) ?? inferCategory(reference),
+        content: parsed.body,
+        metadata: parsed.metadata,
         path: reference
       });
     }
@@ -134,7 +189,10 @@ export async function loadCompanyContext(
     ...selectedSections.map((section) =>
       section.path === contextPath
         ? `Primary context file:\n\n${section.content}`
-        : `Referenced file (${section.category}): ${section.path}\n\n${section.content}`
+        : `Referenced file (${section.category}): ${section.path}
+Metadata: ${JSON.stringify(section.metadata)}
+
+${section.content}`
     )
   ]);
 

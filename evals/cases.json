@@ -1,0 +1,25 @@
+{
+  "cases": [
+    {
+      "id": "campaign-brief-launch",
+      "workflow": "campaign-brief",
+      "prompt": "Create a campaign brief for launching an AI reporting feature to B2B SaaS marketing leaders.",
+      "expectedHeadings": ["Objective", "Audience", "Key message", "KPIs"],
+      "qualities": ["review", "risks", "next actions"]
+    },
+    {
+      "id": "message-house-review",
+      "workflow": "message-house-check",
+      "prompt": "Review this positioning statement and tighten it for a mid-market SaaS buyer.",
+      "expectedHeadings": ["Alignment with approved positioning", "Brand voice issues", "Recommended rewrite"],
+      "qualities": ["unsupported claims", "audience fit"]
+    },
+    {
+      "id": "ai-adoption-rollout",
+      "workflow": "ai-adoption-plan",
+      "prompt": "Create a 30-day AI adoption plan for a content and demand gen team.",
+      "expectedHeadings": ["Best initial use cases", "Governance and risk controls", "30-day rollout plan"],
+      "qualities": ["training", "success metrics"]
+    }
+  ]
+}
