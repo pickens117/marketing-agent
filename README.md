@@ -38,6 +38,12 @@ npm install
 export ANTHROPIC_API_KEY="your-api-key"
 ```
 
+4. Run the full verification suite:
+
+```bash
+npm run verify
+```
+
 ## Run It
 
 Use a one-off prompt:
@@ -56,6 +62,18 @@ Use a built-in workflow:
 
 ```bash
 npm run agent -- --mode workflow "Help our demand gen team build an AI-assisted webinar promotion workflow."
+```
+
+Use a custom company context file:
+
+```bash
+npm run agent -- --context-path ./docs/company/company-context.md "Create a message testing plan for our Q3 campaign."
+```
+
+Get machine-readable output:
+
+```bash
+npm run agent -- --json "Create a lightweight AI enablement plan for our content team."
 ```
 
 ## Modes
@@ -101,6 +119,12 @@ That file should summarize the company and point to supporting materials such as
 - `docs/company/personas.md`
 - `docs/company/research-summary.md`
 - `docs/company/legal-constraints.md`
+
+Starter templates are included for:
+
+- `docs/company/brand-guidelines.md`
+- `docs/company/message-house.md`
+- `docs/company/personas.md`
 
 The Node agent will load `docs/company/company-context.md` automatically when it exists and use it to ground recommendations in the company's brand voice, messaging, audience, and constraints.
 
@@ -181,9 +205,11 @@ Use the marketing-ai-enablement subagent to help me build a campaign launch plan
 
 ## Notes
 
-The project has been installed and verified with:
+The project includes a `verify` script that runs:
 
 ```bash
-npm install
 npm run build
+npm run test
+claude plugin validate .
+claude plugin validate ./plugins/marketing-ai-enablement-plugin
 ```

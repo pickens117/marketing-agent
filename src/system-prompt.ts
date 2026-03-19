@@ -48,6 +48,9 @@ Use the following company context as the source of truth for brand voice, messag
 
 ${companyContext.content}
 
+Referenced company files:
+- ${companyContext.referencedFiles.join("\n- ") || "No referenced files listed"}
+
 When company context is present:
 - prefer it over generic assumptions
 - do not invent unsupported claims, proof points, or positioning

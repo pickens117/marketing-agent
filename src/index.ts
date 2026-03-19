@@ -2,47 +2,9 @@ import "dotenv/config";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import { runMarketingAgent } from "./agent.js";
+import { defaultContextPath } from "./context.js";
+import { formatAgentOutput, parseArgs } from "./cli.js";
 import type { AgentMode } from "./system-prompt.js";
-
-type CliOptions = {
-  interactive: boolean;
-  mode: AgentMode;
-  prompt: string;
-};
-
-function parseArgs(argv: string[]): CliOptions {
-  let interactive = false;
-  let mode: AgentMode = "coach";
-  const promptParts: string[] = [];
-
-  for (let index = 0; index < argv.length; index += 1) {
-    const arg = argv[index];
-
-    if (arg === "--interactive") {
-      interactive = true;
-      continue;
-    }
-
-    if (arg === "--mode") {
-      const value = argv[index + 1];
-      if (value === "coach" || value === "campaign" || value === "workflow") {
-        mode = value;
-        index += 1;
-        continue;
-      }
-
-      throw new Error("Expected --mode to be one of: coach, campaign, workflow.");
-    }
-
-    promptParts.push(arg);
-  }
-
-  return {
-    interactive,
-    mode,
-    prompt: promptParts.join(" ").trim()
-  };
-}
 
 async function readPromptFromStdin(): Promise<string> {
   if (process.stdin.isTTY) {
@@ -58,7 +20,7 @@ async function readPromptFromStdin(): Promise<string> {
   return Buffer.concat(chunks).toString("utf8").trim();
 }
 
-async function runInteractive(mode: AgentMode): Promise<void> {
+async function runInteractive(mode: AgentMode, contextPath?: string): Promise<void> {
   const rl = createInterface({ input, output });
   let continueSession = false;
 
@@ -78,6 +40,7 @@ async function runInteractive(mode: AgentMode): Promise<void> {
 
     output.write("\n");
     await runMarketingAgent({
+      contextPath,
       continueSession,
       mode,
       prompt: answer
@@ -99,7 +62,7 @@ async function main(): Promise<void> {
   const prompt = options.prompt || pipedPrompt;
 
   if (options.interactive) {
-    await runInteractive(options.mode);
+    await runInteractive(options.mode, options.contextPath);
     return;
   }
 
@@ -107,10 +70,23 @@ async function main(): Promise<void> {
     throw new Error("Provide a prompt as an argument or pipe one in through stdin.");
   }
 
-  await runMarketingAgent({
+  const response = await runMarketingAgent({
+    contextPath: options.contextPath,
     mode: options.mode,
-    prompt
+    prompt,
+    stream: options.output !== "json"
   });
+
+  if (options.output === "json") {
+    process.stdout.write(
+      `${formatAgentOutput({
+        contextPath: options.contextPath ?? defaultContextPath,
+        mode: options.mode,
+        output: options.output,
+        response
+      })}\n`
+    );
+  }
 }
 
 main().catch((error: unknown) => {

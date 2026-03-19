@@ -4,18 +4,22 @@ import { buildSubagents } from "./subagents.js";
 import { buildSystemPrompt, type AgentMode } from "./system-prompt.js";
 
 export type RunAgentOptions = {
+  contextPath?: string;
   continueSession?: boolean;
   mode: AgentMode;
   prompt: string;
+  stream?: boolean;
 };
 
 export async function runMarketingAgent({
+  contextPath,
   continueSession = false,
   mode,
-  prompt
+  prompt,
+  stream = true
 }: RunAgentOptions): Promise<string> {
   let finalText = "";
-  const companyContext = await loadCompanyContext();
+  const companyContext = await loadCompanyContext(contextPath);
 
   for await (const message of query({
     prompt,
@@ -29,7 +33,7 @@ export async function runMarketingAgent({
       agents: buildSubagents(mode)
     }
   })) {
-    if (message.type === "assistant") {
+    if (stream && message.type === "assistant") {
       for (const block of message.message.content) {
         if (block.type === "text") {
           process.stdout.write(block.text);
@@ -46,7 +50,7 @@ export async function runMarketingAgent({
     }
   }
 
-  if (!finalText) {
+  if (stream && !finalText) {
     process.stdout.write("\n");
   }
 
