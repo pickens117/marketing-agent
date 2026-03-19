@@ -20,7 +20,8 @@ test("parseArgs reads mode, context path, and json output", () => {
     interactive: false,
     mode: "campaign",
     output: "json",
-    prompt: "Build a launch plan"
+    prompt: "Build a launch plan",
+    workflow: "general"
   });
 });
 
@@ -33,7 +34,8 @@ test("formatAgentOutput returns JSON when requested", () => {
     contextPath: "docs/company/company-context.md",
     mode: "workflow",
     output: "json",
-    response: "Plan ready"
+    response: "Plan ready",
+    workflow: "ai-adoption-plan"
   });
 
   assert.equal(
@@ -42,10 +44,18 @@ test("formatAgentOutput returns JSON when requested", () => {
       {
         contextPath: "docs/company/company-context.md",
         mode: "workflow",
-        response: "Plan ready"
+        response: "Plan ready",
+        workflow: "ai-adoption-plan"
       },
       null,
       2
     )
   );
+});
+
+test("parseArgs reads workflow option", () => {
+  const result = parseArgs(["--workflow", "experiment-plan", "Design", "a", "test"]);
+
+  assert.equal(result.workflow, "experiment-plan");
+  assert.equal(result.prompt, "Design a test");
 });

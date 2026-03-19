@@ -1,6 +1,8 @@
 {
   "name": "marketing-agent-marketplace",
-  "description": "Marketplace for reusable Claude Code plugins focused on marketing AI enablement.",
+  "metadata": {
+    "description": "Marketplace for reusable Claude Code plugins focused on marketing AI enablement."
+  },
   "owner": {
     "name": "Stephen Pickens"
   },

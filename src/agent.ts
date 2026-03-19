@@ -2,6 +2,7 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 import { loadCompanyContext } from "./context.js";
 import { buildSubagents } from "./subagents.js";
 import { buildSystemPrompt, type AgentMode } from "./system-prompt.js";
+import { getWorkflowDefinition, type WorkflowId } from "./workflows.js";
 
 export type RunAgentOptions = {
   contextPath?: string;
@@ -9,6 +10,7 @@ export type RunAgentOptions = {
   mode: AgentMode;
   prompt: string;
   stream?: boolean;
+  workflow: WorkflowId;
 };
 
 export async function runMarketingAgent({
@@ -16,10 +18,14 @@ export async function runMarketingAgent({
   continueSession = false,
   mode,
   prompt,
-  stream = true
+  stream = true,
+  workflow
 }: RunAgentOptions): Promise<string> {
   let finalText = "";
-  const companyContext = await loadCompanyContext(contextPath);
+  const companyContext = await loadCompanyContext(
+    contextPath,
+    getWorkflowDefinition(workflow).contextCategories
+  );
 
   for await (const message of query({
     prompt,
@@ -28,7 +34,7 @@ export async function runMarketingAgent({
       tools: ["WebSearch"],
       maxTurns: 8,
       permissionMode: "dontAsk",
-      systemPrompt: buildSystemPrompt(mode, companyContext),
+      systemPrompt: buildSystemPrompt(mode, workflow, companyContext),
       allowedTools: ["WebSearch"],
       agents: buildSubagents(mode)
     }

@@ -76,11 +76,29 @@ Get machine-readable output:
 npm run agent -- --json "Create a lightweight AI enablement plan for our content team."
 ```
 
+Use a structured workflow pack:
+
+```bash
+npm run agent -- --workflow experiment-plan "Design a LinkedIn messaging test for our new product launch."
+```
+
 ## Modes
 
 - `coach`: default mode for broad marketing guidance
 - `campaign`: sharper campaign strategy and messaging support
 - `workflow`: focused on AI process design, tooling, and enablement
+
+## Workflow Packs
+
+The CLI now supports stronger workflow-specific output contracts with `--workflow`:
+
+- `general`: flexible default guidance
+- `campaign-brief`: structured campaign brief
+- `message-house-check`: messaging review against approved positioning
+- `content-repurpose`: content repurposing plan
+- `experiment-plan`: test plan with thresholds and decision rules
+- `ai-governance-checklist`: AI governance checklist for marketing workflows
+- `ai-adoption-plan`: team rollout plan for AI adoption
 
 ## Output Style
 
@@ -163,6 +181,10 @@ Included plugin commands:
 
 - `/campaign-brief`: generates a structured marketing campaign brief
 - `/ai-adoption-plan`: creates a practical AI rollout plan for a marketing team
+- `/message-house-check`: reviews messaging against approved positioning
+- `/content-repurpose`: creates a repurposing plan from a source asset or topic
+- `/experiment-plan`: builds a test plan with metrics and decision thresholds
+- `/ai-governance-checklist`: generates a practical AI governance checklist
 
 ## Example Workflow
 

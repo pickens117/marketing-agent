@@ -5,6 +5,7 @@ import { runMarketingAgent } from "./agent.js";
 import { defaultContextPath } from "./context.js";
 import { formatAgentOutput, parseArgs } from "./cli.js";
 import type { AgentMode } from "./system-prompt.js";
+import type { WorkflowId } from "./workflows.js";
 
 async function readPromptFromStdin(): Promise<string> {
   if (process.stdin.isTTY) {
@@ -20,11 +21,16 @@ async function readPromptFromStdin(): Promise<string> {
   return Buffer.concat(chunks).toString("utf8").trim();
 }
 
-async function runInteractive(mode: AgentMode, contextPath?: string): Promise<void> {
+async function runInteractive(
+  mode: AgentMode,
+  workflow: WorkflowId,
+  contextPath?: string
+): Promise<void> {
   const rl = createInterface({ input, output });
   let continueSession = false;
 
   output.write(`Marketing agent started in ${mode} mode.\n`);
+  output.write(`Workflow pack: ${workflow}\n`);
   output.write("Type a request and press enter. Type exit to quit.\n\n");
 
   while (true) {
@@ -43,7 +49,8 @@ async function runInteractive(mode: AgentMode, contextPath?: string): Promise<vo
       contextPath,
       continueSession,
       mode,
-      prompt: answer
+      prompt: answer,
+      workflow
     });
     continueSession = true;
     output.write("\n\n");
@@ -62,7 +69,7 @@ async function main(): Promise<void> {
   const prompt = options.prompt || pipedPrompt;
 
   if (options.interactive) {
-    await runInteractive(options.mode, options.contextPath);
+    await runInteractive(options.mode, options.workflow, options.contextPath);
     return;
   }
 
@@ -74,7 +81,8 @@ async function main(): Promise<void> {
     contextPath: options.contextPath,
     mode: options.mode,
     prompt,
-    stream: options.output !== "json"
+    stream: options.output !== "json",
+    workflow: options.workflow
   });
 
   if (options.output === "json") {
@@ -83,7 +91,8 @@ async function main(): Promise<void> {
         contextPath: options.contextPath ?? defaultContextPath,
         mode: options.mode,
         output: options.output,
-        response
+        response,
+        workflow: options.workflow
       })}\n`
     );
   }
