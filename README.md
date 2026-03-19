@@ -224,6 +224,43 @@ Included plugin commands:
 - `/launch-checklist`: creates a launch readiness checklist
 - `/prompt-improve`: rewrites a marketing prompt for better outputs
 
+## Example Claude CLI Workflow
+
+One simple Claude Code workflow for a marketing team could look like this:
+
+1. Add the marketplace and install the plugin:
+
+```text
+/plugin marketplace add pickens117/marketing-agent
+/plugin install marketing-ai-enablement-plugin@marketing-agent-marketplace
+```
+
+2. Open Claude Code in a project that has company context in `docs/company/`.
+
+3. Generate a launch brief:
+
+```text
+/campaign-brief Launch a new AI reporting feature for mid-market SaaS marketing teams
+```
+
+4. Refine the messaging:
+
+```text
+/message-house-check We help marketers automate reporting completely with zero analyst effort.
+```
+
+5. Create the rollout plan for the team:
+
+```text
+/ai-adoption-plan Roll out AI-assisted workflows for our content and demand gen teams this quarter
+```
+
+6. If needed, improve a working prompt before handing it to the team:
+
+```text
+/prompt-improve Write five LinkedIn posts about our product launch.
+```
+
 ## Example Workflow
 
 Here is one practical way a marketing team could use the agent for a new campaign:
