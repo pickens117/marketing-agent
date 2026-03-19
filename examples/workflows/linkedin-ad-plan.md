@@ -9,6 +9,9 @@ VP Marketing, Demand Gen leaders, and marketing ops leaders at 100-1000 employee
 ## Offer
 Live demo plus benchmark checklist download.
 
+## Recommended formats
+Single image ads for core value prop tests, document ads for checklist promotion, and video ads for thought-leadership proof.
+
 ## Creative angles
 Time-to-insight, analyst control, and leadership-ready reporting.
 
@@ -16,6 +19,9 @@ Time-to-insight, analyst control, and leadership-ready reporting.
 Variant 1: outcome-led pain angle.
 Variant 2: analyst-control credibility angle.
 Variant 3: benchmark/reporting efficiency angle.
+
+## Placement guidance
+Prioritize feed placements first, keep creative readable in desktop-heavy contexts, and align document ads with lead-gen or resource-download objectives.
 
 ## CTA recommendations
 Book a demo, register for webinar, download checklist.

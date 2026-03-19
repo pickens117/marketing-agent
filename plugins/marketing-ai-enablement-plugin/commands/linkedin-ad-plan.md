@@ -1,5 +1,5 @@
 ---
-description: Create a LinkedIn ad plan with audience targeting, creative angles, copy variants, and measurement guidance.
+description: Create a LinkedIn ad plan with audience targeting, format recommendations, creative angles, copy variants, placement guidance, and measurement guidance.
 argument-hint: [offer, audience, or campaign goal]
 ---
 
@@ -18,8 +18,10 @@ Use this structure:
 1. Objective
 2. Audience
 3. Offer
-4. Creative angles
-5. Ad copy variants
-6. CTA recommendations
-7. Measurement plan
-8. Risks and review checkpoints
+4. Recommended formats
+5. Creative angles
+6. Ad copy variants
+7. Placement guidance
+8. CTA recommendations
+9. Measurement plan
+10. Risks and review checkpoints

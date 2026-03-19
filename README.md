@@ -166,8 +166,8 @@ The CLI now supports stronger workflow-specific output contracts with `--workflo
 
 - `general`: flexible default guidance
 - `campaign-brief`: structured campaign brief
-- `linkedin-ad-plan`: LinkedIn ad planning with copy variants and measurement guidance
-- `meta-ad-plan`: Meta ad planning with audience hypotheses and creative variants
+- `linkedin-ad-plan`: LinkedIn ad planning with format, placement, copy, and measurement guidance
+- `meta-ad-plan`: Meta ad planning with format, placement, creative, and measurement guidance
 - `message-house-check`: messaging review against approved positioning
 - `content-repurpose`: content repurposing plan
 - `experiment-plan`: test plan with thresholds and decision rules
@@ -263,8 +263,8 @@ Included plugin commands:
 
 - `/campaign-brief`: generates a structured marketing campaign brief
 - `/ai-adoption-plan`: creates a practical AI rollout plan for a marketing team
-- `/linkedin-ad-plan`: creates a LinkedIn ad plan with copy variants and measurement guidance
-- `/meta-ad-plan`: creates a Meta ad plan with audience hypotheses and creative variants
+- `/linkedin-ad-plan`: creates a LinkedIn ad plan with format, placement, copy variants, and measurement guidance
+- `/meta-ad-plan`: creates a Meta ad plan with format, placement, creative variants, and measurement guidance
 - `/message-house-check`: reviews messaging against approved positioning
 - `/content-repurpose`: creates a repurposing plan from a source asset or topic
 - `/experiment-plan`: builds a test plan with metrics and decision thresholds

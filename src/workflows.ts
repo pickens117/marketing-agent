@@ -83,21 +83,25 @@ At minimum include markdown headings with these exact titles:
   },
   "linkedin-ad-plan": {
     contextCategories: ["brand", "messaging", "persona", "research", "legal", "team"],
-    description: "Create a LinkedIn ad plan with audience, creative angles, copy variants, and measurement guidance.",
+    description: "Create a LinkedIn ad plan with audience, format recommendations, creative angles, copy variants, placement guidance, and measurement guidance.",
     examplePath: "examples/workflows/linkedin-ad-plan.md",
     followUpWorkflow: "experiment-plan",
     sectionTitles: [
       "Objective",
       "Audience",
       "Offer",
+      "Recommended formats",
       "Creative angles",
       "Ad copy variants",
+      "Placement guidance",
       "CTA recommendations",
       "Measurement plan",
       "Risks and review checkpoints"
     ],
     validationRules: [
       "must include LinkedIn-specific audience framing",
+      "must include recommended formats",
+      "must include placement guidance",
       "must include multiple ad copy variants",
       "must include a measurement plan and review checkpoints"
     ],
@@ -105,29 +109,35 @@ At minimum include markdown headings with these exact titles:
 ## Objective
 ## Audience
 ## Offer
+## Recommended formats
 ## Creative angles
 ## Ad copy variants
+## Placement guidance
 ## CTA recommendations
 ## Measurement plan
 ## Risks and review checkpoints`
   },
   "meta-ad-plan": {
     contextCategories: ["brand", "messaging", "persona", "research", "legal", "team"],
-    description: "Create a Meta ad plan with audience hypotheses, creative angles, copy variants, and measurement guidance.",
+    description: "Create a Meta ad plan with audience hypotheses, format recommendations, creative angles, copy variants, placement guidance, and measurement guidance.",
     examplePath: "examples/workflows/meta-ad-plan.md",
     followUpWorkflow: "experiment-plan",
     sectionTitles: [
       "Objective",
       "Audience hypotheses",
       "Offer",
+      "Recommended formats",
       "Creative angles",
       "Ad copy variants",
+      "Placement guidance",
       "CTA recommendations",
       "Measurement plan",
       "Risks and review checkpoints"
     ],
     validationRules: [
       "must include Meta-friendly audience hypotheses",
+      "must include recommended formats",
+      "must include placement guidance",
       "must include multiple creative and copy variants",
       "must include a measurement plan and review checkpoints"
     ],
@@ -135,8 +145,10 @@ At minimum include markdown headings with these exact titles:
 ## Objective
 ## Audience hypotheses
 ## Offer
+## Recommended formats
 ## Creative angles
 ## Ad copy variants
+## Placement guidance
 ## CTA recommendations
 ## Measurement plan
 ## Risks and review checkpoints`
