@@ -6,8 +6,8 @@ WIDTH = 1280
 HEIGHT = 760
 PADDING_X = 42
 PADDING_Y = 34
-LINE_HEIGHT = 30
-FONT_SIZE = 22
+LINE_HEIGHT = 24
+FONT_SIZE = 18
 TITLE_SIZE = 28
 BACKGROUND = "#0b1020"
 PANEL = "#11182b"
@@ -33,6 +33,7 @@ def load_font(size: int):
 
 FONT = load_font(FONT_SIZE)
 TITLE_FONT = load_font(TITLE_SIZE)
+TEXT_WIDTH = WIDTH - (PADDING_X * 2) - 36
 
 LINES = [
     "> /plugin marketplace add pickens117/marketing-agent",
@@ -65,6 +66,27 @@ def draw_window(draw: ImageDraw.ImageDraw):
         draw.ellipse((x, 38, x + 12, 50), fill=color)
 
 
+def wrap_line(draw: ImageDraw.ImageDraw, line: str):
+    if not line:
+        return [""]
+
+    words = line.split(" ")
+    wrapped = []
+    current = words[0]
+
+    for word in words[1:]:
+        candidate = f"{current} {word}"
+        bbox = draw.textbbox((0, 0), candidate, font=FONT)
+        if bbox[2] <= TEXT_WIDTH:
+            current = candidate
+        else:
+            wrapped.append(current)
+            current = word
+
+    wrapped.append(current)
+    return wrapped
+
+
 def render_scene(visible_lines):
     image = Image.new("RGB", (WIDTH, HEIGHT), BACKGROUND)
     draw = ImageDraw.Draw(image)
@@ -79,8 +101,9 @@ def render_scene(visible_lines):
             fill = PROMPT
         elif line.startswith("##"):
             fill = ACCENT
-        draw.text((PADDING_X, y), line, font=FONT, fill=fill)
-        y += LINE_HEIGHT
+        for wrapped_line in wrap_line(draw, line):
+            draw.text((PADDING_X, y), wrapped_line, font=FONT, fill=fill)
+            y += LINE_HEIGHT
 
     return image
 
