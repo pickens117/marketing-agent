@@ -106,6 +106,35 @@ The Node agent will load `docs/company/company-context.md` automatically when it
 
 The Claude Code skill is also written to look for that file before giving company-specific guidance.
 
+## Share With Claude CLI Users
+
+This repo now includes a Claude Code plugin marketplace and a reusable plugin:
+
+- marketplace file: `.claude-plugin/marketplace.json`
+- plugin: `plugins/marketing-ai-enablement-plugin`
+
+To test locally:
+
+```bash
+claude --plugin-dir ./plugins/marketing-ai-enablement-plugin
+```
+
+To add the local marketplace and install the plugin from Claude Code:
+
+```text
+/plugin marketplace add .
+/plugin install marketing-ai-enablement-plugin@marketing-agent-marketplace
+```
+
+To share it with others, publish this repository to GitHub and tell users to run:
+
+```text
+/plugin marketplace add pickens117/marketing-agent
+/plugin install marketing-ai-enablement-plugin@marketing-agent-marketplace
+```
+
+After installation, users can invoke the plugin's agent or let Claude use the skill when tasks match.
+
 ## Example Workflow
 
 Here is one practical way a marketing team could use the agent for a new campaign:
